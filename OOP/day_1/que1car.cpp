@@ -34,6 +34,7 @@ class Car{
 };
 
 int main(){
+	
 	Car a,b;
 	
 	
@@ -43,6 +44,7 @@ int main(){
     a.getCar();
     b.getCar();
 	
+	 return 0;
 };
 
 
