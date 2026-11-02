@@ -11,7 +11,7 @@ class Time
 public:
     void setData()
     {
-        cout << "Enter seconds: ";
+        cout << "Enter total seconds: ";
         cin >> seconds;
     }
 
@@ -21,7 +21,7 @@ public:
         minutes = (seconds % 3600) / 60;
         remainingSeconds = seconds % 60;
 
-        cout << "Time - ";
+        cout << "HH:MM:SS  - ";
 
         if (hours < 10)
             cout << "0";
