@@ -40,5 +40,14 @@ class D : public B, public C{
 
 
 int main(){
-
+	B b1;
+	b1.getA();
+	cout << endl;
+	C c1;
+	c1.getA();
+	cout << endl;
+	D d1;
+	d1.getD();
+	d1.getB();
+	d1.getC();
 };
