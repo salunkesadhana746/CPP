@@ -3,163 +3,187 @@ using namespace std;
 
 class Vehicle{
 	
-		int vehicleID, year;
-		string manufacturer, model; 
+	// declear attributes
+	int vehicleId, year;
+	string manufacturer, model;
+	
+	static int totalVehicles;
+	
+	
+	//default constructor
+	public :
+		Vehicle(){
+			this->vehicleId = 0;
+			this->model = "";
+			this->manufacturer = "";
+			this->year = 0;
+			totalVehicles++;
+		}
 		
-	static int totalVehicle;	
-	
-	public :	
-	//default constructor is set empty
-	Vehicle(){
-		this->vehicleID = 0;
-		this->manufacturer = "";
-		model = "";
-		year = 0;
-		totalVehicle++;
-	}
-	
-	
-	//destructor
-	~Vehicle(){
-		totalVehicle--;
-	}
-	
-	int getVehicleID()
-	{
-		return this->vehicleID;
-	}
-	
-	void setVehicle(){
+		//Destructor
+		~Vehicle(){
+			totalVehicles--;
+		}
 		
-		cout << "Enter your Vehicle ID -: ";
-		cin >> this->vehicleID;
-		cout << "Enter your Vehicle Model -: ";
-		cin >> this->model;
-		cout << "Enter your Vehicle Manufacturer -: ";
-		cin >> this->manufacturer;
-		cout << "Enter your Vehicle Year -: ";
-		cin >> this->year;
-		cout << endl;
-	
-	}
-	
-	void displayVehicle()
-        {
-            cout << "Vehicle ID :- " << this->vehicleID << endl;
-            cout << "Vehicle Model :- " << this->model << endl;
-            cout << "Vehicle Manufacturer :- " << this->manufacturer <<endl; 
-            cout << "Vehicle registration Year  :- " << this->year << endl;
-        }
-	
-	
+		
+		// is function me hum vahicle id me jo int num hoga use getVehicleID se return kar rahe hai 
+		int getVehicleID(){
+			return this->vehicleId;
+		}
+		
+		
+		//isme user input set ho raha hai 
+		void setVehicle(){
+			
+			cout << "Enter Your Vehicle ID -: ";
+			cin >> this->vehicleId;
+			cout << "Enter Your Vehicle Model -: ";
+			cin >> this->model;
+			cout << "Enter Your Vehicle Manufacturer -: ";
+			cin >> this->manufacturer;
+			cout << "Enter Your Vehicle year -: ";
+			cin >> this->year;
+			cout << endl;
+			
+		}
+		
+		
+		//isme user input display hoga
+		void displayVehicle(){
+			
+			cout << "Vehicle ID -: " << this->vehicleId <<endl;
+			cout << "Vehicle Model -: " << this->model <<endl;
+			cout << "Vehicle Manufacturer -: " << this->manufacturer <<endl;
+			cout << "Vehicle Registry Year -: " << this->year <<endl;
+			cout << endl;
+		}
 };
 
-// static 
-int Vehicle::totalVehicle = 0;
+//static member
+int Vehicle::totalVehicles = 0;
 
 
-
-class Car : public Vehicle{	
-	string fuleType;
+//simple inheritance
+class Car : public Vehicle{
+	int fuelType;
 };
 
+//multilevel inheritance
 class ElectricCar : public Car {
-	int bettryCapacity;
+	int betteryCapacity;
 };
 
-class SportsCar : public ElectricCar{
+//multilevel inheritance
+class sportsCar : public ElectricCar{
 	int topSpeed;
 };
 
-class SUV : public Car {
+//hierarchical inheritance
+class Sedan : public Car{
 	
 };
 
-class Sedan : public Car {
+//hierarchical inheritance
+class SUV : public Car{
 	
 };
 
-class AirCraft : public Car {
+//multiple inheritance
+class AirCraft : public Vehicle{
 	int flightRange;
 };
 
+//multiple inheritance
 class FlyingCar : public Car, public AirCraft{
 	
 };
 
-
-class VehicleRegistry{
-	
+//vehicle registry system 
+class vehicleRegistry{
 	Vehicle v1[50];
-	int totalVehicle =0;
+	int totalVehicles = 0;
 	
 	public :
-		void addVehicles(){
-			v1[totalVehicle].setVehicle();
-			totalVehicle++;
+		
+		//add vahicle ki process yaha hogi
+		void addVehicle(){
+			v1[totalVehicles].setVehicle();
+			totalVehicles++;
 		}
 		
+		//sabhi vehicle yaha dikhege
 		void displayAllVehicles(){
-			cout << "--------Display Vehicle---------" <<endl;
+			cout <<"--------------------------------------"<<endl;
 			
-			for(int i=0; i< totalVehicle; i++){
+			for(int i=0; i < totalVehicles; i++){
 				v1[i].displayVehicle();
+				cout <<endl;
 			}
-			cout << "--------------------------------" << endl;
+			cout <<"--------------------------------------"<<endl;
 		}
 		
-		void searchVehicle(){
+		// VEhicle id se vehicle ka data display kar sakte hai
+		void searchVehicle() {
 			
 			int id;
-			cout << "Enter Vehicle ID -: ";
-			cin >> id;
+			bool found = false;
 			
-			for(int i = 0; i < totalVehicle; i++){
+			cout<< "Enter Vehicle ID -: ";
+			cin >> id;
+			cout << endl;
+			
+			for(int i = 0;  i< totalVehicles; i++){
+				
 				if(id == v1[i].getVehicleID()){
 					v1[i].displayVehicle();
+					found = true;
+					break;
 				}
 			}
 			
+			if(found == false){
+				cout << "Enter Valid ID... Vehicle not found.!" << endl;
+			}
+
+
 		};
-};
 
 int main(){
 	
-	VehicleRegistry v1;
+	vehicleRegistry v1;
 	int choice;
 	bool isON = true;
 	
+	cout << "WelCome to Vehicle Registry System ...!" << endl << endl;
 	
 	do{
-		cout << endl;
-		cout << "WelCome to Vehicle Registry System !!" << endl;
-		cout << endl;
+		
 		cout << "Enter 1 to Add Vehicle. " << endl;
-		cout << "Enter 2 to Display All Vehicle. " << endl;
+		cout << "Enter 2 to Display Vehicle. " << endl;
 		cout << "Enter 3 to Search Vehicle by ID. " << endl;
-		cout << "Enter 4 to Exit system" << endl;
+		cout << "Enter 4 to Exit. " << endl;
 		cout << endl;
 		
-		cout << "Enter your Choice -: ";
+		cout << "Enter Your Choice -: ";
 		cin >> choice;
 		cout << endl;
 		
 		switch(choice){
 			case 1:
-				v1.addVehicles();
+				v1.addVehicle();
 				break;
 				
 			case 2:
-			    v1.displayAllVehicles();
-			    break;
-			    
+				v1.displayAllVehicles();
+				break;
+				
 			case 3:
 				v1.searchVehicle();
 				break;
-				
+			
 			case 4:
 				isON = false;
-				cout << "Program is Exited...!" << endl;
+				cout << "Exited Program...!"<<endl;
 				break;
 				
 			default:
@@ -167,8 +191,11 @@ int main(){
 				break;
 				
 		}
-	}while(isON);
+		
+	}
+	while(isON);
+	
 	
 	return 0;
-};
+}
 
